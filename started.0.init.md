@@ -1,8 +1,9 @@
 # 环境准备
 
 
-启动项目前, 我默认你已经准备好下列软件: 
+启动项目前, 我默认你已准备好: 
 - [go](https://golang.org/dl/)
+- 开启go modules
 - [protoc](https://github.com/protocolbuffers/protobuf)
 - [protoc-gen-go](https://github.com/protocolbuffers/protobuf-go)
 - [git](https://git-scm.com)
