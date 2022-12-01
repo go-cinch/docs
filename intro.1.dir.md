@@ -25,18 +25,18 @@
 │   ├── client.yaml      // 配置grpc服务client, 如auth
 │   └── ...              // 其他自定义配置文件以yaml结尾
 ├── internal             // 内部逻辑代码
-│   ├── biz              // 业务逻辑的组装层，类似 DDD 的 domain 层，data 类似 DDD 的 repo，而 repo 接口在这里定义，使用依赖倒置的原则。
+│   ├── biz              // 业务逻辑的组装层, 类似 DDD 的 domain 层, data 类似 DDD 的 repo, 而 repo 接口在这里定义, 使用依赖倒置的原则. 
 │   │   ├── biz.go
 │   │   ├── greeter.go
 │   │   └── reason.go    // 定义错误描述
-│   ├── conf             // 内部使用的config的结构定义，使用proto格式生成
+│   ├── conf             // 内部使用的config的结构定义, 使用proto格式生成
 │   │   ├── db           // sql文件目录, 每一次数据库变更都放在这里, 参考https://github.com/rubenv/sql-migrate
 │   │   │   ├── xxx.sql  // sql文件
 │   │   │   └── ...
 │   │   ├── conf.pb.go
 │   │   ├── conf.proto
 │   │   └── migrate.go   // embed sql文件
-│   ├── data             // 业务数据访问，包含 cache、db 等封装，实现了 biz 的 repo 接口。我们可能会把 data 与 dao 混淆在一起，data 偏重业务的含义，它所要做的是将领域对象重新拿出来，我们去掉了 DDD 的 infra层。
+│   ├── data             // 业务数据访问, 包含 cache、db 等封装, 实现了 biz 的 repo 接口. 我们可能会把 data 与 dao 混淆在一起, data 偏重业务的含义, 它所要做的是将领域对象重新拿出来, 我们去掉了 DDD 的 infra层. 
 │   │   ├── cache.go     // cache层, 防缓存击穿/缓存穿透/缓存雪崩
 │   │   ├── client.go    // 各个微服务client初始化
 │   │   ├── ctx.go
@@ -52,7 +52,7 @@
 │   │   ├── grpc.go
 │   │   ├── http.go
 │   │   └── server.go
-│   └── service          // 实现了 api 定义的服务层，类似 DDD 的 application 层，处理 DTO 到 biz 领域实体的转换(DTO -> DO)，同时协同各类 biz 交互，但是不应处理复杂逻辑
+│   └── service          // 实现了 api 定义的服务层, 类似 DDD 的 application 层, 处理 DTO 到 biz 领域实体的转换(DTO -> DO), 同时协同各类 biz 交互, 但是不应处理复杂逻辑
 │       ├── greeter.go
 │       └── service.go
 ├── third_party          // api依赖的第三方proto, 编译proto文件需要用到

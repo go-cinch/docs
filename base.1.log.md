@@ -1,0 +1,165 @@
+# 日志
+
+
+日志在kratos log基础上封装, 同时结合[logrus](https://github.com/sirupsen/logrus)的一些优点
+
+
+## 全局变量
+
+
+内置变量如下:
+- `ts` - 时间, 包含年月日、时分秒、时区
+- `caller` - 代码行号, 自动查询最匹配的代码行号, 无需显示配置, 参考[common/log](https://github.com/go-cinch/common/blob/master/log/kratos.go#L130)
+- `service.id` - 服务编号, 当前机器内网网卡ip地址
+- `service.name` - 服务名称
+- `service.version` - 服务版本号, 构建时生成的git commit id
+- `trace.id` - 链路追踪trace编号, 一般1个服务的1次接口调用会生成1个唯一编号
+- `span.id` - 链路追踪span编号, 一般1个服务的1次接口的内部设置了开启span就会生成编号, 若1个接口下有5个method开启span, 那就会生成5个span编号
+
+修改:
+```shell
+vim cmd/game/main.go
+```
+
+```go
+    log.DefaultWrapper = log.NewWrapper(
+		log.WithLogger(
+			kratosLog.With(
+				kratosLog.NewStdLogger(os.Stdout),
+				"ts", kratosLog.DefaultTimestamp,
+				"service.id", id,
+				"service.name", Name,
+				"service.version", Version,
+				"trace.id", tracing.TraceID(),
+				"span.id", tracing.SpanID(),
+				"index", "abc",
+			),
+		),
+	)
+```
+
+?> 重启项目, 每条日志输出都会带上`index=abc`
+
+
+## 局部变量
+
+
+在任意位置使用log, 增加自定义变量可以这样做:
+```go
+import "github.com/go-cinch/common/log"
+
+log.
+	WithFields(log.Fields{
+        "var1": "v1",
+        "var2": "v2",
+        "var3": "v3",
+    }).
+	Info("print fields")
+// 或
+log.
+	WithField("var4": "v4").
+	Info("print one field")
+```
+
+?> 对应日志输出会带上自定义局部变量
+
+
+## 关联error
+
+
+需要输出err时, 直接使用WithError方法:
+```go
+import "github.com/go-cinch/common/log"
+
+err = fmt.Errorf("something wrong")
+
+log.
+	WithError(err).
+	Info("print error")
+```
+
+?> 对应日志输出会带上局部变量`err=something wrong`
+
+
+## 关联上下文
+
+
+有上下文时, 直接使用WithContext方法:
+```go
+import "github.com/go-cinch/common/log"
+
+
+log.
+    WithContext(ctx).
+	Info("print something")
+```
+
+?> 若链路追踪开启, 对应日志会输出关联的trace.id和span.id
+
+
+## 格式化
+
+
+若需要格式化输出内容, 直接传入对应的`format`和`args`, 无需Infof方法, 自动根据参数个数适配:
+```go
+import "github.com/go-cinch/common/log"
+
+// 若想输出字符串
+log.Info("print something")
+
+// 格式化字符串
+name := "game"
+age := 18
+log.Info("print name: %s, age: %d", name, age)
+// 等效于
+// log.Infof("print name: %s, age: %d", name, age)
+// 或
+// log.Info(fmt.Sprintf("print name: %s, age: %d", name, age))
+```
+
+?> 是不是感觉更简洁了一些~
+
+
+## Gorm
+
+
+内置gorm日志插件, 配置使用参见[internal/data/data.go](https://github.com/go-cinch/layout/blob/dev/internal/data/data.go#L146)
+执行SQL语句时会有相应日志输出
+
+实现细节参见[common/plugins/gorm/log](https://github.com/go-cinch/common/blob/master/plugins/gorm/log/log.go)
+
+## 替换日志
+
+
+kratos支持多种日志, 下面以logrus为例:
+
+```shell
+go get -u github.com/sirupsen/logrus
+go get -u github.com/go-kratos/kratos/contrib/log/logrus/v2
+vim cmd/game/main.go
+```
+
+```go
+import (
+	kratosLogrus "github.com/go-kratos/kratos/contrib/log/logrus/v2"
+	"github.com/sirupsen/logrus"
+)
+
+...
+
+  log.DefaultWrapper = log.NewWrapper(
+    log.WithLogger(
+      kratosLog.With(
+        kratosLogrus.NewLogger(logrus.New()),
+        "ts", kratosLog.DefaultTimestamp,
+        "service.id", id,
+        "service.name", Name,
+        "service.version", Version,
+        "trace.id", tracing.TraceID(),
+        "span.id", tracing.SpanID(),
+      ),
+    ),
+  )
+```
+
+参考[kratos log](https://go-kratos.dev/docs/component/log#%E9%80%82%E9%85%8D%E5%AE%9E%E7%8E%B0)

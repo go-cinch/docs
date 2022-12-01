@@ -57,7 +57,7 @@ func (s *GreeterService) CreateGame(ctx context.Context, req *greeter.CreateGame
 }
 ```
 
-!> common/log基于kratos logger封装一层, 内部适配链路追踪以及gorm SQL语句打印, 如果使用其他log可能导致显示不正常
+!> common/log基于kratos logger封装一层, 内部适配链路追踪以及gorm SQL语句打印, 若使用其他log可能导致显示不正常
 
 ## 关闭鉴权
 
