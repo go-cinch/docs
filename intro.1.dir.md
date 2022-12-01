@@ -3,7 +3,7 @@
 
 项目结构根据模板[cinch-layout](https://github.com/go-cinch/layout)创建  
 
-创建步骤参考[初始化](/init)
+创建步骤参考[初始化](/started.0.init)
 
 初始化完成会得到下列目录: 
 ```
@@ -48,6 +48,7 @@
 │   │   └── task         // 异步任务, 内部调用asynq
 │   ├── server           // http和grpc实例的创建和配置
 │   │   ├── middleware   // 自定义中间件
+│   │   │   └── locales  // i18n多语言map配置文件
 │   │   ├── grpc.go
 │   │   ├── http.go
 │   │   └── server.go

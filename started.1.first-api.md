@@ -5,11 +5,11 @@
 
 为greeter增加一个接口: 创建一个游戏
 ```
-cd api/greeter-proto
-vim greeter.proto
+vim api/greeter-proto/greeter.proto
 ```
 
-在service Greeter中增加以下内容(这里省略CreateGameRequest内容, 参考CreateGreeterRequest)
+在service Greeter中增加以下内容
+接口名、请求参数名、响应参数名、是否开启http接口(参考CreateGreeter): 
 ```protobuf
   rpc CreateGame (CreateGameRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -18,6 +18,16 @@ vim greeter.proto
     };
   }
 ```
+
+新增message CreateGameRequest
+请求参数字段, 这里简单演示创建游戏名(create接口不需要响应参数字段)
+```protobuf
+message CreateGameRequest {
+  string name = 1;
+}
+```
+
+!> 这里为了演示方便, 直接使用greeter-proto, 正常情况下你应该新建一个game-proto管理game服务的对外接口.
 
 ## 编译api
 
@@ -31,27 +41,29 @@ make api
 ## 实现业务逻辑
 
 ```
-cd internal/service
-vim greeter.go
+vim internal/service/greeter.go
 ```
 
 增加以下内容
 ```go
+import "github.com/go-cinch/common/log"
+
 func (s *GreeterService) CreateGame(ctx context.Context, req *greeter.CreateGameRequest) (rp *emptypb.Empty, err error) {
 	tr := otel.Tracer("api")
 	ctx, span := tr.Start(ctx, "CreateGame")
 	defer span.End()
-	log.WithContext(ctx).Info("create game success")
+	log.WithContext(ctx).Info("create game: %s success", req.Name)
 	return
 }
 ```
+
+!> common/log基于kratos logger封装一层, 内部适配链路追踪以及gorm SQL语句打印, 如果使用其他log可能导致显示不正常
 
 ## 关闭鉴权
 
 为了测试方便, 暂时关闭鉴权
 ```
-cd internal/server/middleware
-vim whitelist.go
+vim internal/server/middleware/whitelist.go
 ```
 
 增加以下内容
@@ -64,14 +76,14 @@ vim whitelist.go
 
 ## 重启game服务
 
-重启步骤参见[启动](/init?id=启动)
+重启步骤参见[启动](/started.0.init?id=启动)
 
 
 ## 测试访问
 
 ```
 curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/game
-# 输出如下说明服务通了只是没有权限, 出现其他说明配置有误
+# 输出如下说明服务通了, 出现其他说明配置有误
 # {}
 # 且日志会打印出create game success
 ```
