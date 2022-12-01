@@ -8,3 +8,5 @@
 - 基础
   - [配置](base.0.config.md)
   - [日志](base.1.log.md)
+  - [数据库](base.2.db.md)
+  - [缓存](base.3.cache.md)
