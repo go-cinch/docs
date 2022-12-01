@@ -1,8 +1,9 @@
 # 环境准备
 
 
-启动项目前, 我默认你已经准备好下列软件: 
+启动项目前, 我默认你已准备好: 
 - [go](https://golang.org/dl/)
+- 开启go modules
 - [protoc](https://github.com/protocolbuffers/protobuf)
 - [protoc-gen-go](https://github.com/protocolbuffers/protobuf-go)
 - [git](https://git-scm.com)
@@ -66,17 +67,15 @@ make all
 
 
 ```
-# 修改auth项目配置以及game项目配置
-cd auth/configs
+# 修改auth项目配置
 # 将mysql/redis的配置修改成你本地配置
-vim conifg.yaml
+vim auth/configs/conifg.yaml
 
 # 修改game项目配置
-cd game/configs
 # 将mysql/redis的配置修改成你本地配置
-vim conifg.yaml
+vim game/configs/conifg.yaml
 # 将auth服务host和端口修改成你本地配置
-vim client.yaml
+vim game/configs/client.yaml
 
 # 启动auth
 cd auth
