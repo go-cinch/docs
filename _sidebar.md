@@ -7,3 +7,4 @@
   - [接口文档](started.2.api-doc.md)
 - 基础
   - [配置](base.0.config.md)
+  - [日志](base.1.log.md)

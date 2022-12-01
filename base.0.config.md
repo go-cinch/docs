@@ -27,9 +27,9 @@
 在kratos官方配置文件增加的额外字段用法:
 
 - `server.machineId`  
-  机器编号或应用编号, 系统内置[sonyflake](http://github.com/sony/sonyflake)雪花id生成算法, 如果是多个节点部署最好设置不一样的id, 大于0即可
+  机器编号或应用编号, 系统内置[sonyflake](http://github.com/sony/sonyflake)雪花id生成算法, 若是多个节点部署最好设置不一样的id, 大于0即可
 - `server.language`  
-  默认语言, 如果请求Accept-Language未指定, 自动使用该默认语言, 内置i18n多语言管理, 目前支持中文和英文(zh/en), 其他语言自行扩展
+  默认语言, 若请求Accept-Language未指定, 自动使用该默认语言, 内置i18n多语言管理, 目前支持中文和英文(zh/en), 其他语言自行扩展
 - `data.redis.dsn`  
   redis服务地址, 系统中很多组件依赖redis, 属于强依赖, 不配置会导致某些功能无法使用, 配置规则参见[asynq.ParseRedisURI](https://github.com/hibiken/asynq/blob/master/asynq.go#L436)
 - `tracer.enable`  
