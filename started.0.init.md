@@ -105,7 +105,7 @@ export CINCH_CLIENT_AUTH=127.0.0.1:6160
 kratos run
 ```
 
-?> Tips: 环境变量前缀可在cmd/xxx/main.go中修改
+?> Tips: 环境变量前缀可在cmd/xxx/main.go中修改, 参见[环境变量前缀](/base.0.config?id=环境变量前缀)
 
 
 ## 测试访问
