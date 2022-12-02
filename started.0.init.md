@@ -125,4 +125,29 @@ curl http://127.0.0.1:8080/greeter
 # {"code":401, "reason":"UNAUTHORIZED", "message":"token is missing", "metadata":{}}
 ```
 
+## 关闭Idempotent鉴权
+
+为了测试方便, 暂时关闭鉴权
+```
+vim auth/internal/server/middleware/whitelist.go
+```
+
+增加以下内容
+```go
+	whitelist[auth.OperationAuthIdempotent] = struct{}{}
+```
+
+?> Tips: 上述代码表示将idempotent这个接口加入白名单, 跳过鉴权
+
+
+重启auth服务再测试:
+```
+curl http://127.0.0.1:6060/idempotent
+# 输出包含token字段说明配置对了
+# {"token":"041c12d3-ddd0-4c63-b3fb-454f3e7ec40a"}
+```
+
+!> 仅用作本地测试, 正式环境还是开启权限校验, 避免恶意调用
+
+
 ?> 至此, 微服务已启动完毕, auth以及game, 接下来自定义你的game啦~

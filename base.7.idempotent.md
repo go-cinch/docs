@@ -1,0 +1,76 @@
+# 接口幂等性
+
+
+内置接口幂等性中间件, 基于[common/idempotent](https://github.com/go-cinch/common/blob/master/idempotent/idempotent.go), 常用于Create接口
+
+
+接口幂等性以黑名单形式存在, 默认都不校验, 若新增接口需要校验, 需按下列方式设置
+
+
+## [第一个接口](/started.1.first-api)
+
+
+首先创建create game接口
+
+
+## 加入黑名单
+
+
+修改`idempotentBlacklist`方法中的blacklist
+```shell
+vim game/internal/server/middleware/whitelist.go
+```
+
+```go
+func idempotentBlacklist() selector.MatchFunc {
+	...
+    blacklist[greeter.OperationGreeterCreateGame] = struct{}{}
+	...
+}
+```
+
+
+## 重启game服务
+
+
+重启步骤参见[启动](/started.0.init?id=启动)
+
+
+
+## 用法
+
+一般来说, 前端页面中若有一个接口需要幂等性校验, 在这个页面加载时需要申请一个幂等性token, 接口发起时携带这个token
+
+
+### 无token
+
+
+```
+curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/game
+# {"code":400,"reason":"ILLEGAL_PARAMETER","message":"idempotent token is missing","metadata":{}}
+```
+
+
+### 申请token
+
+
+auth服务内置接口, 先[关闭Idempotent鉴权](/started.0.init?id=%e5%85%b3%e9%97%adidempotent%e9%89%b4%e6%9d%83), 获取一个token
+```shell
+curl http://127.0.0.1:6060/idempotent
+# {"token":"6173d935-e35b-40b3-8034-3a41bdb663c3"}
+```
+
+
+### 带token
+
+携带token提交
+```
+curl -H "Content-Type: application/json" -H "x-idempotent: 6173d935-e35b-40b3-8034-3a41bdb663c3" -X POST http://127.0.0.1:8080/game
+# 输出如下说明配置正确, 出现其他说明配置有误
+# {}
+# 且日志会打印出create game success
+
+# 用过一次将会失效
+curl -H "Content-Type: application/json" -H "x-idempotent: 6173d935-e35b-40b3-8034-3a41bdb663c3" -X POST http://127.0.0.1:8080/game
+# {"code":400,"reason":"ILLEGAL_PARAMETER","message":"idempotent token is invalid","metadata":{}}
+```
