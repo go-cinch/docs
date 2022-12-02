@@ -13,3 +13,5 @@
   - [Make命令](base.4.make.md)
   - [错误管理](base.5.reason.md)
   - [国际化](base.6.i18n.md)
+  - [接口幂等性](base.7.idempotent.md)
+  - [分布式定时任务](base.8.task.md)
