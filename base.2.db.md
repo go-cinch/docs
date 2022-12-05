@@ -1,6 +1,37 @@
 # 数据库
 
 
+## 数据迁移
+
+
+内置[sql-migrate](https://github.com/rubenv/sql-migrate), 通过sql脚本管理数据迁移
+
+
+### 所在目录
+
+
+```
+├── internal
+│   ├── conf
+│   │   └── db
+│   │       ├── 2022081510-greeter.sql
+│   │       └── YYYYMMDDHH-${name}.sql // 命令格式: '年月日时' + '-' + '自定义名称' + '.sql'
+```
+
+!> 语法错误导致的回滚不应出现在正式环境, 因此我们只保留migrate.Up, 参见[common/migrate](https://github.com/go-cinch/common/blob/master/migrate/migrate.go#L101), 但sql-migrate官方也支持migrate.Down
+
+
+### 执行记录
+
+
+sql执行记录默认保存在`schema_migrations`表中  
+
+| id                     | applied_at          |
+|------------------------|---------------------|
+| 2022081510-greeter.sql | 2022-10-18 00:00:00 |
+| YYYYMMDDHH-${name}.sql | YYYY-MM-DD HH:00:00 |
+
+
 ## 事务
 
 

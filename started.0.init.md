@@ -4,6 +4,8 @@
 启动项目前, 我默认你已准备好: 
 - [go](https://golang.org/dl/)
 - 开启go modules
+- [mysql](https://www.mysql.com)(本地测试建议使用docker-compose搭建)
+- [redis](https://redis.io)(本地测试建议使用docker-compose搭建)
 - [protoc](https://github.com/protocolbuffers/protobuf)
 - [protoc-gen-go](https://github.com/protocolbuffers/protobuf-go)
 - [git](https://git-scm.com)
@@ -13,7 +15,7 @@
     ```
 
 
-# Auth服务
+# [Auth服务](https://github.com/go-cinch/auth)
 
 
 权限认证服务无需再开发, 下载开箱即用
@@ -150,4 +152,4 @@ curl http://127.0.0.1:6060/idempotent
 !> 仅用作本地测试, 正式环境还是开启权限校验, 避免恶意调用
 
 
-?> 至此, 微服务已启动完毕, auth以及game, 接下来自定义你的game啦~
+?> 至此, 微服务已启动完毕, auth以及game, 接下来可以自定义你的game啦~

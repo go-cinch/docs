@@ -96,3 +96,41 @@ func process(t task) (err error) {
 
 ?> t.payload.Payload, 就是`WithRunPayload`携带值, 参见[layout.task.process](https://github.com/go-cinch/auth/blob/dev/internal/pkg/task/task.go#L72)  
 完整源码[common/worker](https://github.com/go-cinch/common/blob/master/worker/worker.go)
+
+
+## UI界面
+
+
+为了方便查看任务执行情况, 你可以配置下[asynqmon](https://github.com/hibiken/asynqmon), 下面用[docker-compose](https://docs.docker.com/compose)简单演示下
+
+```shell
+vim docker-compose.yml
+```
+
+写入以下内容
+```yml
+version: "3"
+
+services:
+  asynqmon:
+    image: hibiken/asynqmon:master
+    ports:
+      - '3302:8080'
+    command:
+      - --redis-url=redis://192.168.5.105:6379/0
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: '1024M'
+```
+
+!> 记得将redis-url改成你本地局域网地址
+
+```shell
+docker-compose --compatibility up -d
+```
+
+访问[http://127.0.0.1:3302](http://127.0.0.1:3302), 可以看到
+
+![asynqmon](_images/base.8.task-1.png)
