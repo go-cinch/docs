@@ -17,7 +17,7 @@
 - `span.id` - 链路追踪span编号, 一般1个服务的1次接口的内部设置了开启span就会生成编号, 若1个接口下有5个method开启span, 那就会生成5个span编号
 
 修改:
-```shell
+```bash
 vim cmd/game/main.go
 ```
 
@@ -133,7 +133,7 @@ log.Info("print name: %s, age: %d", name, age)
 
 kratos支持多种日志, 下面以logrus为例:
 
-```shell
+```bash
 go get -u github.com/sirupsen/logrus
 go get -u github.com/go-kratos/kratos/contrib/log/logrus/v2
 vim cmd/game/main.go

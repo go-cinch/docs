@@ -3,7 +3,7 @@
 
 biz层设置缓存分3个步骤即可完成
 
-```shell
+```bash
 vim internal/biz/greeter.go
 ```
 

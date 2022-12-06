@@ -10,7 +10,7 @@
 
 更新git submodule
 
-```shell
+```bash
 make sub
 ```
 
@@ -20,7 +20,7 @@ make sub
 
 更新`api/xxx-proto`文件, 生成到`api/xxx`目录, 并生成swagger json文档到`docs/xxx-proto`
 
-```shell
+```bash
 make api
 ```
 
@@ -30,7 +30,7 @@ make api
 
 更新`internal/conf/conf.proto`
 
-```shell
+```bash
 make config
 ```
 
@@ -40,7 +40,7 @@ make config
 
 编译wire依赖注入
 
-```shell
+```bash
 make generate
 ```
 
@@ -50,7 +50,7 @@ make generate
 
 合并执行api/config/generate命令
 
-```shell
+```bash
 make all
 ```
 
@@ -60,7 +60,7 @@ make all
 
 下载一些golang基础工具
 
-```shell
+```bash
 make init
 ```
 
@@ -70,7 +70,7 @@ make init
 
 编译应用
 
-```shell
+```bash
 make build
 ```
 
@@ -80,7 +80,7 @@ make build
 
 输出帮助信息
 
-```shell
+```bash
 make help
 ```
 
