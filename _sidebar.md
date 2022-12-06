@@ -15,3 +15,5 @@
   - [国际化](base/6.i18n.md)
   - [接口幂等性](base/7.idempotent.md)
   - [分布式定时任务](base/8.task.md)
+- 进阶
+  - [Auth服务](advanced/auth/0.auth.md)
