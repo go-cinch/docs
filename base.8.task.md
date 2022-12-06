@@ -103,12 +103,12 @@ func process(t task) (err error) {
 
 为了方便查看任务执行情况, 你可以配置下[asynqmon](https://github.com/hibiken/asynqmon), 下面用[docker-compose](https://docs.docker.com/compose)简单演示下
 
-```shell
+```bash
 vim docker-compose.yml
 ```
 
 写入以下内容
-```yml
+```yaml
 version: "3"
 
 services:
@@ -127,7 +127,7 @@ services:
 
 !> 记得将redis-url改成你本地局域网地址
 
-```shell
+```bash
 docker-compose --compatibility up -d
 ```
 

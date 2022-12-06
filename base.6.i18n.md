@@ -89,7 +89,7 @@ func jwt(c *conf.Bootstrap, client redis.UniversalClient) func(handler middlewar
 
 开启[auth服务](/started.0.init?id=auth%e6%9c%8d%e5%8a%a1)简单测试下
 
-```shell
+```bash
 # 无参数, 使用系统默认值
 curl http://127.0.0.1:6060/info
 # {"code":401, "reason":"UNAUTHORIZED", "message":"token is missing", "metadata":{}}

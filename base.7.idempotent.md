@@ -17,7 +17,7 @@
 
 
 修改`idempotentBlacklist`方法中的blacklist
-```shell
+```bash
 vim game/internal/server/middleware/whitelist.go
 ```
 
@@ -45,7 +45,7 @@ func idempotentBlacklist() selector.MatchFunc {
 ### 无token
 
 
-```
+```bash
 curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/game
 # {"code":400,"reason":"ILLEGAL_PARAMETER","message":"idempotent token is missing","metadata":{}}
 ```
@@ -55,7 +55,7 @@ curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/game
 
 
 auth服务内置接口, 先[关闭Idempotent鉴权](/started.0.init?id=%e5%85%b3%e9%97%adidempotent%e9%89%b4%e6%9d%83), 获取一个token
-```shell
+```bash
 curl http://127.0.0.1:6060/idempotent
 # {"token":"6173d935-e35b-40b3-8034-3a41bdb663c3"}
 ```
@@ -64,7 +64,7 @@ curl http://127.0.0.1:6060/idempotent
 ### 带token
 
 携带token提交
-```
+```bash
 curl -H "Content-Type: application/json" -H "x-idempotent: 6173d935-e35b-40b3-8034-3a41bdb663c3" -X POST http://127.0.0.1:8080/game
 # 输出如下说明配置正确, 出现其他说明配置有误
 # {}

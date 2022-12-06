@@ -11,7 +11,7 @@
 ## 编译
 
 执行编译api命令: 
-```shell
+```bash
 cd game
 make api
 # 输出如下

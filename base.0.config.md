@@ -48,7 +48,7 @@
 
 
 主要用于定义外部微服务连接地址, 如auth/order/...服务
-```yml
+```yaml
 client:
   auth: '${CLIENT_AUTH:auth:6160}'
   order: '${CLIENT_AUTH:order:7160}'
@@ -66,7 +66,7 @@ client:
 ### conf.proto
 
 
-```shell
+```bash
 vim internal/conf/conf.proto
 ```
 
@@ -74,7 +74,7 @@ vim internal/conf/conf.proto
 ### 编译
 
 
-```shell
+```bash
 make config
 ```
 
@@ -100,7 +100,7 @@ make config
 
 项目名称默认值`cinch-layout`
 
-```shell
+```bash
 vim cmd/game/main.go
 # 修改为你想要的即可, 不建议为空
 # Name = "game"
@@ -123,14 +123,14 @@ vim cmd/game/main.go
 
 前缀默认值`CINCH_`
 
-```shell
+```bash
 vim cmd/game/main.go
 # 修改为你想要的即可, 建议全部大写以下划线结尾`_`, 不建议为空
 # EnvPrefix = "GAME_"
 ```
 
 修改后使用环境变量覆盖MySQL的dsn
-```shell
+```bash
 cd game
 export GAME_DATA_DATABASE_DSN=root:root@tcp(127.0.0.1:3306)/game?parseTime=True
 kratos run

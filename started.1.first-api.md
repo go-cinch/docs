@@ -4,7 +4,7 @@
 ## 增加接口
 
 为greeter增加一个接口: 创建一个游戏
-```
+```bash
 vim api/greeter-proto/greeter.proto
 ```
 
@@ -31,7 +31,7 @@ message CreateGameRequest {
 
 ## 编译api
 
-```
+```bash
 # 进入项目根目录
 cd game
 make api
@@ -40,7 +40,7 @@ make api
 
 ## 实现业务逻辑
 
-```
+```bash
 vim internal/service/greeter.go
 ```
 
@@ -62,7 +62,7 @@ func (s *GreeterService) CreateGame(ctx context.Context, req *greeter.CreateGame
 ## 关闭鉴权
 
 为了测试方便, 暂时关闭鉴权
-```
+```bash
 vim internal/server/middleware/whitelist.go
 ```
 
@@ -81,7 +81,7 @@ vim internal/server/middleware/whitelist.go
 
 ## 测试访问
 
-```
+```bash
 curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/game
 # 输出如下说明服务通了, 出现其他说明配置有误
 # {}

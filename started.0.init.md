@@ -10,7 +10,7 @@
 - [protoc-gen-go](https://github.com/protocolbuffers/protobuf-go)
 - [git](https://git-scm.com)
 - [kratos cli工具](https://go-kratos.dev/docs/getting-started/usage)
-    ```
+    ```bash
     go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
     ```
 
@@ -20,7 +20,7 @@
 
 权限认证服务无需再开发, 下载开箱即用
 
-```
+```bash
 git clone https://github.com/go-cinch/auth
 # 可以指定tag
 # git clone -b v1.0.0 https://github.com/go-cinch/auth
@@ -30,7 +30,7 @@ git clone https://github.com/go-cinch/auth
 # 创建Game服务
 
 
-```
+```bash
 # 1.通过模板创建项目 -r 指定仓库 -b 指定分支
 kratos new game -r https://github.com/go-cinch/layout.git -b dev
 
@@ -68,7 +68,7 @@ make all
 ## 配置文件
 
 
-```
+```bash
 # 修改auth项目配置
 # 将mysql/redis的配置修改成你本地配置
 vim auth/configs/conifg.yaml
@@ -92,7 +92,7 @@ kratos run
 ## 环境变量
 
 
-```
+```bash
 # 启动auth
 cd auth
 export AUTH_DATA_DATABASE_DSN=root:root@tcp(127.0.0.1:3306)/auth?parseTime=True
@@ -114,14 +114,14 @@ kratos run
 
 
 auth服务: 
-```
+```bash
 curl http://127.0.0.1:6060/idempotent
 # 输出如下说明服务通了只是没有权限, 出现其他说明配置有误
 # {"code":401, "reason":"UNAUTHORIZED", "message":"token is missing", "metadata":{}}
 ```
 
 game服务: 
-```
+```bash
 curl http://127.0.0.1:8080/greeter
 # 输出如下说明服务通了只是没有权限, 出现其他说明配置有误
 # {"code":401, "reason":"UNAUTHORIZED", "message":"token is missing", "metadata":{}}
@@ -130,7 +130,7 @@ curl http://127.0.0.1:8080/greeter
 ## 关闭Idempotent鉴权
 
 为了测试方便, 暂时关闭鉴权
-```
+```bash
 vim auth/internal/server/middleware/whitelist.go
 ```
 
@@ -143,7 +143,7 @@ vim auth/internal/server/middleware/whitelist.go
 
 
 重启auth服务再测试:
-```
+```bash
 curl http://127.0.0.1:6060/idempotent
 # 输出包含token字段说明配置对了
 # {"token":"041c12d3-ddd0-4c63-b3fb-454f3e7ec40a"}

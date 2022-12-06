@@ -32,7 +32,7 @@ enum ErrorReason {
 
 开启[auth服务](/started.0.init?id=auth%e6%9c%8d%e5%8a%a1)简单测试下
 
-```shell
+```bash
 curl http://127.0.0.1:6060/info
 # {"code":401, "reason":"UNAUTHORIZED", "message":"token is missing", "metadata":{}}
 ```

@@ -37,7 +37,7 @@ sql执行记录默认保存在`schema_migrations`表中
 
 data层已经做好事务的封装, 在biz业务层直接使用即可
 
-```shell
+```bash
 vim internal/biz/greeter.go
 ```
 
@@ -57,7 +57,7 @@ func (uc *GreeterUseCase) Create(ctx context.Context, item *Greeter) error {
 
 获取gorm.DB实例
 
-```shell
+```bash
 vim internal/data/greeter.go
 ```
 
@@ -77,7 +77,7 @@ func (ro greeterRepo) Create(ctx context.Context, item *biz.Greeter) (err error)
 
 系统内置[sonyflake](http://github.com/sony/sonyflake)雪花id生成算法
 
-```shell
+```bash
 vim internal/data/greeter.go
 ```
 
