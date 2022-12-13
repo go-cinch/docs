@@ -18,3 +18,4 @@
 - 进阶
   - [Auth服务](advanced/auth/0.auth.md)
   - [公共包](advanced/common/0.common.md)
+  - [缓存](advanced/cache/0.cache.md)
