@@ -1,6 +1,7 @@
 - 简介
   - [简介](intro/0.intro.md)
   - [项目结构](intro/1.dir.md)
+  - [互动交流](intro/2.communication.md)
 - 快速开始
   - [初始化](started/0.init.md)
   - [第一个接口](started/1.first-api.md)
