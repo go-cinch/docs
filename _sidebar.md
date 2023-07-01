@@ -4,9 +4,12 @@
   - [互动交流](intro/2.communication.md)
 - 快速开始
   - [初始化](started/0.init.md)
-  - [第一个接口](started/1.first-api.md)
+  - [第一个CRUD](started/1.first-api.md)
   - [接口文档](started/2.api-doc.md)
   - [前端](started/3.frontend.md)
+- 推荐规范
+  - [Git](standard/0.git.md)
+  - [Go](standard/1.go.md)
 - 基础
   - [配置](base/0.config.md)
   - [日志](base/1.log.md)
