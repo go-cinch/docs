@@ -15,6 +15,7 @@
   - [配置](base/0.config.md)
   - [日志](base/1.log.md)
   - [数据库](base/2.db.md)
+  - [gorm/gen数据库映射](base/9.gorm.gen.md)
   - [缓存](base/3.cache.md)
   - [Make命令](base/4.make.md)
   - [错误管理](base/5.reason.md)
