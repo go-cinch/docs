@@ -6,8 +6,9 @@
   - [初始化](started/0.init.md)
   - [第一个CRUD](started/1.first-api.md)
   - [接口文档](started/2.api-doc.md)
-  - [前端](started/3.frontend.md)
-  - [更新日志](started/4.update-log.md)
+  - [nginx鉴权配置](started/3.nginx.md)
+  - [前端](started/4.frontend.md)
+  - [更新日志](started/n.update-log.md)
 - 推荐规范
   - [Git](standard/0.git.md)
   - [Go](standard/1.go.md)

@@ -10,6 +10,17 @@
 
 !> 不一定下个版本就会完成TODO, 结合实际需要和空闲程度而定, 客官不要着急~
 
+## v1.2.0
+
+- 包升级, go v1.23, kratos v2.8.3, go-redis v9.7.0
+- 使用bsm/redislock替换原来的分布式锁
+- 更强大的工具库samber/lo
+- 幂等性token从原来server端生成替换为mobile端生成
+- 日志接入logrus替换kratos默认log
+- 修复worker的一些问题
+- 修复已知bug, 同步最新layout
+- 完善docs文档
+
 ## v1.1.0
 
 - 包升级, go v1.22, kratos v2.7.0, go-redis v9.2.1
